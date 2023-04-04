@@ -55,7 +55,7 @@ const Navbar = () => {
               </button>
               {
                 categories.map(category => (
-                  <li key = {category.id}><Link to = {`/category/${category.id}`} className = "nav-link text-white" onClick={() => setIsSidebarOpen(false)}>{category.name}</Link></li>
+                  <li key = {category.id}><Link to = {`/category/${category.id}/1`} className = "nav-link text-white" onClick={() => setIsSidebarOpen(false)}>{category.name}</Link></li>
                 ))
               }
             </ul>

@@ -6,6 +6,7 @@ import {Home, Category, Cart} from "./pages/index";
 // components
 import Navbar from './components/Navbar/Navbar';
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 import store from "./store/store";
 
@@ -15,9 +16,10 @@ function App() {
       <Provider store = {store}>
         <BrowserRouter>
           <Navbar />
+          <ScrollToTop />
           <Routes>
             <Route path = "/" element = {<Home />} />
-            <Route path = "/category/:id" element = {<Category />} />
+            <Route path = "/category/:id/:numberPage" element = {<Category />} />
             <Route path = "/cart" element = {<Cart />} />
           </Routes>
           <Footer />

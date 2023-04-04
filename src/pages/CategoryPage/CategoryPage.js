@@ -4,17 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductsByCategory } from '../../store/categorySlice';
 import { useParams, Link } from 'react-router-dom';
 import "./CategoryPage.scss";
+import { findCategoryById } from '../../utils/findCategoryById';
+import PageSelector from '../../components/PageSelector/PageSelector';
 
 const CategoryPage = () => {
     const dispatch = useDispatch();
-    const {id} = useParams();
+    const {id, numberPage} = useParams();
     const {catProductSingle: products, catProductSingleStatus: status} = useSelector((state) => state.category);
+    const {data: categories} =useSelector(state => state.category)
 
     useEffect(() => {
-      dispatch(fetchProductsByCategory(id, 'single'));
+      dispatch(fetchProductsByCategory(id, 'single', numberPage));
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
-
+    const handlePageChange = (newPage) => {
+      dispatch(fetchProductsByCategory(id, 'single', newPage));
+    };
     return (
       <div className = "category-page">
         <div className = "container">
@@ -35,12 +40,13 @@ const CategoryPage = () => {
                 </span>
               </li>
               <li>
-                { products[0] && products[0].name}
+                { products[0] && findCategoryById(categories, products[0].categoriesId).name}
               </li>
             </ul>
           </div>
         </div>
         <ProductList products = {products} status = {status} />
+        <PageSelector totalPages={20} currentPage={numberPage} onPageChange={handlePageChange}/>
       </div>
     )
 }

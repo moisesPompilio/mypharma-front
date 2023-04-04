@@ -52,20 +52,23 @@ export const fetchCategories = () => {
     }
 }
 
-export const fetchProductsByCategory = (categoryID, dataType) => {
+export const fetchProductsByCategory = (categoryID, dataType, numberPage) => {
     return async function fetchCategoryProductThunk(dispatch){
         if(dataType === 'all') dispatch(setCategoriesStatusAll(STATUS.LOADING));
         if(dataType === 'single') dispatch(setCategoriesStatusSingle(STATUS.LOADING));
+        if(numberPage === undefined || numberPage === null || numberPage <= 0) numberPage = 1
         
         try{
-            const response = await fetch(`${BASE_URL}product`);
-            const data = await response.json();
             if(dataType === 'all'){
-                dispatch(setCategoriesProductAll(data.slice(0, 40)));
+                const response = await fetch(`${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&pageSize=10`);
+                const data = await response.json();
+                dispatch(setCategoriesProductAll(data));
                 dispatch(setCategoriesStatusAll(STATUS.IDLE));
             }
             if(dataType === 'single'){
-                dispatch(setCategoriesProductSingle(data.slice(0, 40)));
+                const response = await fetch(`${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}`);
+                const data = await response.json();
+                dispatch(setCategoriesProductSingle(data));
                 dispatch(setCategoriesStatusSingle(STATUS.IDLE));
             }
         } catch(error){

@@ -19,8 +19,12 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
-    dispatch(fetchProductsByCategory(1, 'all'));
-    dispatch(fetchProductsByCategory(2, 'all'));
+    if(categories[0] !== undefined){
+      dispatch(fetchProductsByCategory(categories[0].id, 'all', 1));
+    }
+    if(categories[1] !== undefined){
+      dispatch(fetchProductsByCategory(categories[1].id, 'all', 1));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
