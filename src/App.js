@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 import store from "./store/store";
+import SearchProductByNamePage from './pages/SearchProductByNamePage/SearchProductByNamePage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path = "/" element = {<Home />} />
             <Route path = "/category/:id/:numberPage" element = {<Category />} />
+            <Route path = "/searchProductByName/:search/:numberPage" element = {<SearchProductByNamePage />} />
             <Route path = "/cart" element = {<Cart />} />
           </Routes>
           <Footer />

@@ -1,31 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import ProductList from '../../components/ProductList/ProductList';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProductsByCategory } from '../../store/categorySlice';
-import { useParams, Link, useLocation } from 'react-router-dom';
-import "./CategoryPage.scss";
-import { findCategoryById } from '../../utils/findCategoryById';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
+import "./SearchProductByNamePage.scss";
 import PageSelector from '../../components/PageSelector/PageSelector';
+import { fetchSeachProducts } from '../../store/searchProductByNameSlice';
 import SelectOrderingofProducts from '../../components/SelectOrderingofProducts/SelectOrderingofProducts';
-import { useNavigate } from 'react-router-dom';
 import { readTotalPageFromLocalStorage } from '../../utils/localStorage';
 import { getPageNumberFromPathname } from '../../utils/getPageNumberFromPathname';
-
-const CategoryPage = () => {
+const SearchProductByNamePage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {id, numberPage} = useParams();
-    const {catProductSingle: products, catProductSingleStatus: status} = useSelector((state) => state.category);
-    const {data: categories} =useSelector(state => state.category)
-    const {data: totalPageState} = useSelector(state => state.totalPage)
-    const [totalpage, setTotalPage] = useState(totalPageState)
+    const {search, numberPage} = useParams();
+    const {data: products, status} = useSelector((state) => state.seachProductsByName);
     const [currentPage, setCurrentPage] = useState(numberPage);
     const [ordering, setOrdering] = useState('A-Z');
+    const {data: totalPageState} = useSelector(state => state.totalPage)
+    const [totalpage, setTotalPage] = useState(totalPageState)
     const location = useLocation();
     useEffect(() => {
-      dispatch(fetchProductsByCategory(id, 'single', currentPage, ordering));
+      dispatch(fetchSeachProducts(search, currentPage, ordering));    
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id, currentPage, ordering]);
+    }, [search, currentPage, ordering]);
     useEffect(() => {
       const numberPageComparision = getPageNumberFromPathname(location.pathname);
       if (numberPageComparision !== undefined && numberPageComparision !== currentPage) {
@@ -38,14 +34,13 @@ const CategoryPage = () => {
     }, [products])
     const handlePageChange = (newPage) => {
       setCurrentPage(newPage)
-      navigate(`/category/${id}/${newPage}`);
+      navigate(`/searchProductByName/${search}/${newPage}`);
     };
-
     const handleOrderChange = (option) => {
       setOrdering(option);
     }
     return (
-      <div className = "category-page">
+      <div className = "searchProductByName-page">
         <div className = "container">
           <div className = "breadcrumb">
             <ul className = "breadcrumb-items flex">
@@ -58,13 +53,13 @@ const CategoryPage = () => {
                 </Link>
               </li>
               <li>
-                Category
+                Search
                 <span className = "breadcrumb-separator">
                   <i className = "fas fa-chevron-right"></i>
                 </span>
               </li>
               <li>
-                { products[0] && findCategoryById(categories, products[0].categoriesId).name}
+                { search && search}
               </li>
             </ul>
           </div>
@@ -79,4 +74,4 @@ const CategoryPage = () => {
     )
 }
 
-export default CategoryPage
+export default SearchProductByNamePage

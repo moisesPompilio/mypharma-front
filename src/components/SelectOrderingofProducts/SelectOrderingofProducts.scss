@@ -1,0 +1,35 @@
+@import "../../App.scss";
+.select-ordering {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  position: relative;
+
+  label {
+    margin-right: 10px;
+  }
+
+  select {
+    background-color: $clr-white;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 8px 10px;
+    font-size: 16px;
+    border-radius: 3px 0 0 3px;
+    transition: border-color 0.3s ease-in-out;
+
+    &:hover {
+      border-color: $clr-gold;
+    }
+
+    option {
+      background-color: $clr-white;
+      color: #000000;
+
+      &:hover {
+        background-color: $clr-regal-blue;
+        color: $clr-white;
+      }
+    }
+  }
+}

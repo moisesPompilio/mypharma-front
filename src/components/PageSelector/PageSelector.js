@@ -1,9 +1,12 @@
 import "./PageSelector.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PageSelector = ({ totalPages, currentPage, onPageChange }) => {
-  const [page, setPage] = useState(currentPage);
-
+  const [page, setPage] = useState(parseInt(currentPage));
+  useEffect(() => {
+    setPage(parseInt(currentPage))    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
   const handleFirstClick = () => {
     if (page !== 1) {
       setPage(1);

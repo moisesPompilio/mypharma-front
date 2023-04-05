@@ -18,6 +18,19 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+  const getPageByNameOrRedirect = (searchName) => {
+    if(searchName ===""){
+      return `/`
+    }else{
+      return `/searchProductByName/${searchValue}/1`
+    }
+  }
+
   return (
     <nav className = "navbar">
       <div className='navbar-content'>
@@ -28,10 +41,13 @@ const Navbar = () => {
               </Link>
 
               <form className = "navbar-search flex">
-                <input type = "text" placeholder='Search here ...' />
-                <button type = "submit" className = "navbar-search-btn">
-                  <i className = "fas fa-search"></i>
-                </button>
+                <input type = "text" placeholder='Search here ...' value={searchValue} onChange={handleSearchChange} />
+                <Link to={getPageByNameOrRedirect(searchValue)}>
+                  <button type = "submit" className = "navbar-search-btn">
+                    <i className = "fas fa-search"></i>
+                  </button>
+                </Link>
+                
               </form>
 
               <div className = "navbar-btns">

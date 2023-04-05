@@ -44,7 +44,7 @@ const SingleCategory = ({products, status}) => {
                                     </div>
                                 </div>
                             )))
-                            : <h1 className='text-uppercase fw-7 text-regal-blue ls-1'>Unfortunately, this category currently has no products.</h1>
+                            : <h1 className='text-uppercase fw-7 text-regal-blue ls-1'>No product found.</h1>
                         }
                     </div>
                 </div>

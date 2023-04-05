@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BASE_URL } from "../utils/apiURL";
 import { STATUS } from "../utils/status";
+import { orderingToQueryParam } from "../utils/orderingToQueryParam";
+import { writeTotalPageToLocalStorage } from "../utils/localStorage";
+
 
 const categorySlice = createSlice({
     name: 'category',
@@ -52,24 +55,26 @@ export const fetchCategories = () => {
     }
 }
 
-export const fetchProductsByCategory = (categoryID, dataType, numberPage) => {
+export const fetchProductsByCategory = (categoryID, dataType, numberPage, ordering) => {
     return async function fetchCategoryProductThunk(dispatch){
         if(dataType === 'all') dispatch(setCategoriesStatusAll(STATUS.LOADING));
         if(dataType === 'single') dispatch(setCategoriesStatusSingle(STATUS.LOADING));
-        if(numberPage === undefined || numberPage === null || numberPage <= 0) numberPage = 1
+        if(numberPage === undefined || numberPage === null || numberPage <= 0) numberPage = 1;
         
         try{
             if(dataType === 'all'){
-                const response = await fetch(`${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&pageSize=10`);
+                const response = await fetch(`${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&pageSize=25`);
                 const data = await response.json();
-                dispatch(setCategoriesProductAll(data));
+                dispatch(setCategoriesProductAll(data.products));
                 dispatch(setCategoriesStatusAll(STATUS.IDLE));
+                writeTotalPageToLocalStorage(data.totalPages)
             }
             if(dataType === 'single'){
-                const response = await fetch(`${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}`);
+                const response = await fetch(`${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&${orderingToQueryParam(ordering)}`);
                 const data = await response.json();
-                dispatch(setCategoriesProductSingle(data));
+                dispatch(setCategoriesProductSingle(data.products));
                 dispatch(setCategoriesStatusSingle(STATUS.IDLE));
+                writeTotalPageToLocalStorage(data.totalPages)
             }
         } catch(error){
             dispatch(setCategoriesStatusAll(STATUS.ERROR));

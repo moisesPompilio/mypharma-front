@@ -108,6 +108,15 @@
     }
 
     @media screen and (max-width: 992px){
+        &-search{
+            align-items: stretch;
+            input{
+                height: 44px;
+            }
+            .navbar-search-btn{
+                height: 44px;
+            }
+        }
         .nav-links{
             position: fixed;
             top: 0;
@@ -155,9 +164,33 @@
     }
 
     @media screen and (max-width: 768px){
-        .navbar-top{
-            .navbar-search{
-                display: none;
+        &-search{
+            align-items: stretch;
+            margin: 0 20px;
+            input{
+                height: 28px;
+                padding: 1px 2px;
+                font-size: 9px;
+            }
+            .navbar-search-btn{
+                width: 30px;
+                height: 28px;
+            }
+        }
+    }
+    @media screen and (max-width: 300px){
+        &-search{
+            align-items: stretch;
+            margin: 0 20px;
+            input{
+                width: 30px;
+                height: 28px;
+                padding: 0px 1px;
+                font-size: 9px;
+            }
+            .navbar-search-btn{
+                width: 30px;
+                height: 28px;
             }
         }
     }
