@@ -1,0 +1,64 @@
+@import "../../App.scss";
+.category-add{
+    transition: $transition;
+    margin-bottom: 5px;
+    padding: 4px 16px;
+    border-radius: 3px;
+    &:hover{
+        background-color: $clr-gold;
+    }
+        }
+.category-items{
+    row-gap: 20px;
+    .category-item{
+        &-img{
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        &-name{
+            padding: 12px 0;
+        }
+        &-button{
+            width: 100%;
+        }
+        &-edit{
+            background-color: $clr-gold;
+            color: $clr-white;
+            margin-bottom: 5px;
+            padding: 4px 16px;
+            border-radius: 3px;
+            transition: $transition;
+            &:hover{
+                background-color: $clr-regal-blue;
+            }
+        }
+        
+        &-delete{
+            background-color: rgba(139, 20, 20, 0.96);
+            color: $clr-white;
+            padding: 4px 16px;
+            border-radius: 3px;
+            transition: $transition;
+            &:hover{
+                background-color: rgb(73, 6, 6);
+            }
+        }
+    }
+
+    @media screen and (min-width: 576px){
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+    }
+
+    @media screen and (min-width: 992px){
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (min-width: 1200px){
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (min-width: 1400px){
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

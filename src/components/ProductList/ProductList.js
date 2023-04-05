@@ -6,7 +6,7 @@ import SingleProduct from '../SingleProduct/SingleProduct';
 import { useSelector, useDispatch } from 'react-redux';
 import { formatPrice } from '../../utils/helpers';
 import Loader from '../Loader/Loader';
-import Error from '../Error/Error';
+import Message from '../Message/Message';
 import { findCategoryById } from '../../utils/findCategoryById';
 
 const ProductList = ({products, status}) => {
@@ -19,7 +19,7 @@ const ProductList = ({products, status}) => {
         dispatch(setIsModalVisible(true));
     }
 
-    if(status === STATUS.ERROR) return (<Error />);
+    if(status === STATUS.ERROR) return (<Message />);
     if(status === STATUS.LOADING) return (<Loader />);
 
     return (
@@ -38,7 +38,7 @@ const ProductList = ({products, status}) => {
                                 <div className='product-item bg-white' key = {product.id} onClick = {() => viewModalHandler(product)}>
                                     <div className='product-item-img'>
                                         <img src = {product.url_photo} alt = "" />
-                                        <div className = "product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">{findCategoryById(categories, products[0].categoriesId).name}</div>
+                                        <div className = "product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">{findCategoryById(categories, product.categoriesId).name}</div>
                                     </div>
                                     <div className='product-item-body'>
                                         <h6 className = "product-item-title text-pine-green fw-4 fs-15">{product.name}</h6>

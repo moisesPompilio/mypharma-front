@@ -2,11 +2,11 @@ import React from 'react';
 import { STATUS } from "../../utils/status";
 import "./Category.scss";
 import {Link} from "react-router-dom";
-import Error from '../Error/Error';
+import Message from '../Message/Message';
 import Loader from '../Loader/Loader';
 
 const Category = ({categories, status}) => {
-    if(status === STATUS.ERROR) return (<Error />);
+    if(status === STATUS.ERROR) return (<Message />);
     if(status === STATUS.LOADING) return (<Loader />);
 
     return (

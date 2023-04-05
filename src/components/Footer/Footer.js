@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Footer.scss";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -17,11 +18,13 @@ const Footer = () => {
                 </div>
 
                 <div className = "footer-item text-center">
-                    <h6 className='fs-17 fw-6'>Policies</h6>
+                    <h6 className='fs-17 fw-6'>Edit Inventory</h6>
                     <ul>
-                        <li><a href = "/" className = "fs-15">Terms & Conditions</a></li>
-                        <li><a href = "/" className = "fs-15">Cookies Policy</a></li>
-                        <li><a href = "/" className = "fs-15">Data Policy</a></li>
+                        <Link to="/editInventory/editInventory/1">
+                        <li><span className = "fs-15">Go Edit Inventory</span></li>
+                        <li><span className = "fs-15">Go Edit Inventory</span></li>
+                        <li><span className = "fs-15">Go Edit Inventory</span></li>
+                        </Link>
                     </ul>
                 </div>
 

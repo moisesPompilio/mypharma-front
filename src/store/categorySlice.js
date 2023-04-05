@@ -24,7 +24,7 @@ const categorySlice = createSlice({
             state.status = action.payload;
         },
         setCategoriesProductAll(state, action){
-            state.catProductAll.push(action.payload);
+            state.catProductAll = action.payload;
         },
         setCategoriesStatusAll(state, action){
             state.catProductAllStatus = action.payload;
@@ -63,7 +63,11 @@ export const fetchProductsByCategory = (categoryID, dataType, numberPage, orderi
         
         try{
             if(dataType === 'all'){
-                const response = await fetch(`${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&pageSize=25`);
+                let url_product;
+                if(categoryID === undefined || categoryID === "editInventory") url_product = `${BASE_URL}product?page=${numberPage}&orde${orderingToQueryParam(ordering)}&pageSize=25`;
+                else url_product = `${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&pageSize=25&${orderingToQueryParam(ordering)}`;
+                const response = await fetch(url_product);
+                console.log(url_product)
                 const data = await response.json();
                 dispatch(setCategoriesProductAll(data.products));
                 dispatch(setCategoriesStatusAll(STATUS.IDLE));

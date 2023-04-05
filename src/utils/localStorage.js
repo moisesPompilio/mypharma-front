@@ -23,7 +23,7 @@ const TOTAL_PAGE_KEY = "totalPage"
 export const readTotalPageFromLocalStorage = () => {
   try {
     const totalPage = localStorage.getItem(TOTAL_PAGE_KEY);
-    return totalPage ? JSON.parse(totalPage) : 1;
+    return totalPage && totalPage !== undefined ? JSON.parse(totalPage) : 1;
   } catch (error) {
     console.error('Error reading totalPage from local storage', error);
     return 1;
@@ -32,6 +32,7 @@ export const readTotalPageFromLocalStorage = () => {
 
 export const writeTotalPageToLocalStorage = (totalPage) => {
   try {
+    if(totalPage === undefined) totalPage = 1
     localStorage.setItem(TOTAL_PAGE_KEY, JSON.stringify(totalPage));
   } catch (error) {
     console.error('Error writing totalPage to local storage', error);

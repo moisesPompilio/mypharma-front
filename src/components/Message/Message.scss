@@ -1,0 +1,43 @@
+.message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+    .message-container {
+      z-index: 9999;
+      position: relative;
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: auto;
+  
+      .close-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+      .message-image{
+        justify-content: center;
+        height: 200px;
+        width: auto;
+      }
+  
+      .message-message {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+  }
