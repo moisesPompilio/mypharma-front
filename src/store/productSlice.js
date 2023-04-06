@@ -26,7 +26,7 @@ export const fetchProducts = () => {
     return async function fetchProductThunk(dispatch){
         dispatch(setStatus(STATUS.LOADING));
         try{
-            const response = await fetch(`${BASE_URL}product?pageSize=30`);
+            const response = await fetch(`${BASE_URL}product?pageSize=15`);
             const data = await response.json();
             dispatch(setProducts(data.products));
             dispatch(setStatus(STATUS.IDLE));

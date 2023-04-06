@@ -37,7 +37,7 @@ const EditInventory = () => {
   useEffect(() => {
     dispatch(fetchProductsByCategory(id, 'all', currentPage, ordering));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, currentPage, ordering, ]);
+  }, [id, currentPage, ordering ]);
   useEffect(() => {
     const numberPageComparision = getPageNumberFromPathname(location.pathname);
     if (numberPageComparision !== undefined && numberPageComparision !== currentPage) {

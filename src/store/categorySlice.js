@@ -64,8 +64,8 @@ export const fetchProductsByCategory = (categoryID, dataType, numberPage, orderi
         try{
             if(dataType === 'all'){
                 let url_product;
-                if(categoryID === undefined || categoryID === "editInventory") url_product = `${BASE_URL}product?page=${numberPage}&orde${orderingToQueryParam(ordering)}&pageSize=25`;
-                else url_product = `${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&pageSize=25&${orderingToQueryParam(ordering)}`;
+                if(categoryID === undefined || categoryID === "editInventory") url_product = `${BASE_URL}product?pageNumber=${numberPage}&${orderingToQueryParam(ordering)}&pageSize=15`;
+                else url_product = `${BASE_URL}product?categoryId=${categoryID}&pageNumber=${numberPage}&pageSize=15&${orderingToQueryParam(ordering)}`;
                 const response = await fetch(url_product);
                 console.log(url_product)
                 const data = await response.json();

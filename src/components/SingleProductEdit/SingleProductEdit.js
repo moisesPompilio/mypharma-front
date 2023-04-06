@@ -50,7 +50,7 @@ const SingleProductEdit = ({product, confirmProductEdit, singleProductEditVisibl
                     <input type="number" value={productEdit.price}  onChange={(e) => setProductEdit({...productEdit, price: e.target.value})}/>
                 </div>
              
-              <button onClick={() => confirmEdit()} type = "button" className='btn-primary add-to-cart-btn' >
+              <button onClick={() => confirmEdit()} type = "button" className='btn-primary confirm-edit-btn' >
                   <span className = 'btn-text'>Confirm edit</span>
               </button>
             </div>
