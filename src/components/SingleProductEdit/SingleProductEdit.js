@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import "./SingleProductEdit.scss";
 
 const SingleProductEdit = ({product, confirmProductEdit, singleProductEditVisible, categories}) => {
-    const [productEdit, setProductEdit] = useState(product)
-    console.log(productEdit)
-  
+    const [productEdit, setProductEdit] = useState(product)  
     const closeEditOverlay = (e) => {
         if(e.target.classList.contains('overlay-bg')){
             singleProductEditVisible(false)
@@ -41,7 +39,7 @@ const SingleProductEdit = ({product, confirmProductEdit, singleProductEditVisibl
                 </div>
                 <div>
                     <label className = "title text-regal-blue fs-22 fw-5">Category: </label>
-                    <select id='order-selec' value={productEdit.categoriesId}  onChange={(e) => setProductEdit({...productEdit, categoriesId: e.target.value})}> {categories.map((category) => ( <option value={category.id}>{category.name}</option>))}</select>
+                    <select id='order-selec' value={productEdit.categoriesId}  onChange={(e) => setProductEdit({...productEdit, categoriesId: e.target.value})}><option>Select Category</option>  {categories.map((category) => ( <option value={category.id}>{category.name}</option>))}</select>
                 </div>
                 <div>
                     <label className='title text-regal-blue fs-22 fw-5'>Description: </label>

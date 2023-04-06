@@ -12,14 +12,17 @@ import SingleProductEdit from '../SingleProductEdit/SingleProductEdit';
 import { editProduct } from '../../apiInsertAndEdit/editProduct';
 import { creatProduct } from '../../apiInsertAndEdit/creatProduct';
 import { deleteProduct } from '../../apiInsertAndEdit/deleteProduct';
+import { fetchProductsByCategory } from '../../store/categorySlice';
+import { useParams } from 'react-router-dom';
 
-const ProductListEdit = ({products, status}) => {
+const ProductListEdit = ({products, status, ordering}) => {
     const dispatch = useDispatch();
     const {isModalVisible} = useSelector((state) => state.modal);
     const {data: categories} = useSelector((state) => state.category);
     const productNew = {id:"", name: "", description:"", price: 0, url_photo: ""}
     const [message, setMessage] = useState('');
     const [type, setType] = useState('');
+     const {categoriesId, numberPage} = useParams();
 
     const [productEdit, setProductEdit] = useState(products[0]);
     const [singleProductEditVisible, setSingleProductEditVisible] = useState(false);
@@ -41,16 +44,17 @@ const ProductListEdit = ({products, status}) => {
             const data = await creatProduct(productEditConfirmd);
             setMessage(data.message)
             setType(data.type)
-            if(type === "cert"){
+            if(data.type === "cert"){
                 setSingleProductEditVisible(false)
+                dispatch(fetchProductsByCategory(categoriesId, 'all', numberPage, ordering));
             }  
             
         }else{
             const data = await editProduct(productEditConfirmd);
             setMessage(data.message)
             setType(data.type)
-            if(type === "cert"){
-                
+            if(data.type === "cert"){
+                dispatch(fetchProductsByCategory(categoriesId, 'all', numberPage, ordering));
                 setSingleProductEditVisible(false)
             }  
         }

@@ -35,7 +35,7 @@ const CategoriesEdit = ({categories, status}) => {
             const data = await creatCategory(categoryEditConfirmd);
             setMessage(data.message)
             setType(data.type)
-            if(type === "cert"){
+            if(data.type === "cert"){
                 dispatch(fetchCategories())
                 setSingleCategoryEditVisible(false)
             }  
@@ -44,7 +44,7 @@ const CategoriesEdit = ({categories, status}) => {
             const data = await editCategory(categoryEditConfirmd);
             setMessage(data.message)
             setType(data.type)
-            if(type === "cert"){
+            if(data.type === "cert"){
                 dispatch(fetchCategories())
                 setSingleCategoryEditVisible(false)
             }  

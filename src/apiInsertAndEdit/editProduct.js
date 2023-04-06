@@ -1,6 +1,7 @@
 import { BASE_URL } from "../utils/apiURL";
 
 export async function editProduct(product){
+    console.log(JSON.stringify(product))
     const data = await fetch(`${BASE_URL}product/${product.id}`, {
         method: 'PUT',
         headers: {
